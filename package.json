@@ -4,6 +4,7 @@
   "description": "hello_nodejs",
   "main": "src/index.js",
   "scripts": {
+    "beautiful": "lint-staged",
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/resources/scss/ -o src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,14 +26,26 @@
     "url": "https://github.com/Huy199/blod_nodejs/issues"
   },
   "homepage": "https://github.com/Huy199/blod_nodejs#readme",
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.3"
+    "express-handlebars": "^6.0.3",
+    "mongoose": "^6.3.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.0",
     "morgan": "^1.10.0",
     "node-sass": "^7.0.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2"
   }
 }
