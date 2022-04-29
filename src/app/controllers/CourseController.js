@@ -17,8 +17,22 @@ class CourseController {
     }
 
     //[POST] /courses/store
-    store(req, res, next) {
-        res.json(req.body);
+    store(req, res) {
+        var num1 = Number(req.body.num1);
+        var num2 = Number(req.body.num2);
+
+        var result = num1 + num2;
+
+        res.send("Addition - " + result);
+
+        // res.json(req.body);
+        // console.log(req)
+        // // console.log(res)
+        // res.json(req.body);
+        // req.body.image = `https://i.ytimg.com/vi/${req.body.videoId}/maxresdefault.jpg`
+        // const course = new Course(req.body)
+        // course.save();
+        // res.send('COURSE SAVED')
     }
 
 }
