@@ -20,8 +20,11 @@ class CourseController {
     store(req, res) {
         req.body.image = `https://i.ytimg.com/vi/${req.body.videoId}/maxresdefault.jpg`
         const course = new Course(req.body)
-        course.save();
-        res.send('COURSE SAVED')
+        course
+            .save()
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch((error) => { });
+
     }
     //[POST] /courses/:id/edit
     edit(req, res, next) {
@@ -40,6 +43,19 @@ class CourseController {
 
     //[PUT] /courses/:id
     destroy(req, res, next) {
+        Course.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+    //[PATCH] /courses/:id/restore
+    restore(req, res, next) {
+        Course.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+
+    //[PUT] /courses/:id/force
+    forceDestroy(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
