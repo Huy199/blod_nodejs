@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 // log request
+const methodOverride = require('method-override')
 const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(morgan("combined"));
 app.use(express.urlencoded());
 app.use(express.json());
+app.use(methodOverride('_method'))
 // Template engine
 app.engine(
   "hbs",
